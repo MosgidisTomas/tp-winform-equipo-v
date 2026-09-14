@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,18 @@ namespace negocio
 
                 try
                 {
+                    string rutaConexionLocal = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "conexion.local.txt");
+
                     try
                     {
-                        conexion.ConnectionString = "server=localhost; database=CATALOGO_P3_DB; user id=sa; password=Mateo.123;";
+                        if (File.Exists(rutaConexionLocal))
+                        {
+                            conexion.ConnectionString = File.ReadAllText(rutaConexionLocal).Trim();
+                        }
+                        else
+                        {
+                            conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true;";
+                        }
                         conexion.Open();
                     }
                     catch
