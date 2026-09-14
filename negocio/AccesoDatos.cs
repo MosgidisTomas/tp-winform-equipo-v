@@ -28,7 +28,7 @@ namespace negocio
                 {
                     try
                     {
-                        conexion.ConnectionString = "server=localhost; database=CATALOGO_P3_DB; user id=sa; password=BaseDatos#2;";
+                        conexion.ConnectionString = "server=localhost; database=CATALOGO_P3_DB; user id=sa; password=Mateo.123;";
                         conexion.Open();
                     }
                     catch
@@ -69,12 +69,26 @@ namespace negocio
             {
                 comando.Parameters.AddWithValue(nombre, valor);
             }
-            public void cerrarConexion()
-                {
-                    if (lector != null && !lector.IsClosed)
-                        lector.Close();
-                    conexion.Close();
-                }
 
-        }  
+            public void ejecutarAccion()
+            {
+                comando.Connection = conexion;
+                try
+                {
+                    comando.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            public void cerrarConexion()
+                    {
+                        if (lector != null && !lector.IsClosed)
+                            lector.Close();
+                        conexion.Close();
+                    }
+
+            }  
 }

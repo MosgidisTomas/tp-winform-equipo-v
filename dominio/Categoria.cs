@@ -14,7 +14,7 @@ namespace dominio
 
         public override string ToString()
         {
-            return Descripcion;
+            return Descripcion ?? "";
         }
 
     }

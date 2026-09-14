@@ -14,6 +14,7 @@ namespace TPWinForm
 {
     public partial class frmArticulos : Form
     {
+        private const string ImagenPorDefecto = "https://placehold.co/300x300.png?text=Sin+Imagen";
         private List<Articulo> listaArticulos;
         public frmArticulos()
         {
@@ -22,11 +23,22 @@ namespace TPWinForm
 
         private void frmArticulos_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulos = negocio.Listar();
-            dgvArticulos.DataSource = listaArticulos;
-            pbxArticulo.Load(listaArticulos[0].Imagenes[0].ImagenUrl);
+            cargar();
+        }
 
+        private void cargar()
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                listaArticulos = negocio.Listar();
+                dgvArticulos.DataSource = listaArticulos;
+                pbxArticulo.Load(listaArticulos[0].Imagenes[0].ImagenUrl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void dgvArticulos_SystemColorsChanged(object sender, EventArgs e)
@@ -48,7 +60,7 @@ namespace TPWinForm
                 }
                 else
                 {
-                    cargarImagen("https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg");
+                    cargarImagen(ImagenPorDefecto);
                 }
 
                 // --- AGREGA ESTA LÍNEA AQUÍ ---
@@ -65,7 +77,14 @@ namespace TPWinForm
             }
             catch (Exception)
             {
-                pbxArticulo.Image = null;
+                try
+                {
+                    pbxArticulo.Load(ImagenPorDefecto);
+                }
+                catch (Exception)
+                {
+                    pbxArticulo.Image = null;
+                }
             }
         }
 
@@ -117,7 +136,11 @@ namespace TPWinForm
 
         }
 
-
-
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAltaArticulo altaArticulo = new frmAltaArticulo();
+            altaArticulo.ShowDialog();
+            cargar(); // Recarga la lista de artículos después de agregar uno nuevo
+        }
     }
 }
