@@ -142,5 +142,14 @@ namespace TPWinForm
             altaArticulo.ShowDialog();
             cargar(); // Recarga la lista de artículos después de agregar uno nuevo
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo modificarAriculo = new frmAltaArticulo(seleccionado);
+            modificarAriculo.ShowDialog();
+            cargar();
+        }
     }
 }

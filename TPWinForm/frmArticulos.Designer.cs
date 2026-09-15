@@ -34,6 +34,7 @@
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.lblCantidadImagenes = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -43,30 +44,30 @@
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvArticulos.Location = new System.Drawing.Point(16, 55);
-            this.dgvArticulos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvArticulos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvArticulos.MultiSelect = false;
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.RowHeadersWidth = 51;
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvArticulos.Size = new System.Drawing.Size(1045, 386);
+            this.dgvArticulos.Size = new System.Drawing.Size(1006, 386);
             this.dgvArticulos.TabIndex = 0;
             this.dgvArticulos.SelectionChanged += new System.EventHandler(this.dgvArticulos_SelectionChanged);
             this.dgvArticulos.SystemColorsChanged += new System.EventHandler(this.dgvArticulos_SystemColorsChanged);
             // 
             // pbxArticulo
             // 
-            this.pbxArticulo.Location = new System.Drawing.Point(1085, 71);
-            this.pbxArticulo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbxArticulo.Location = new System.Drawing.Point(1082, 55);
+            this.pbxArticulo.Margin = new System.Windows.Forms.Padding(4);
             this.pbxArticulo.Name = "pbxArticulo";
-            this.pbxArticulo.Size = new System.Drawing.Size(431, 330);
+            this.pbxArticulo.Size = new System.Drawing.Size(431, 406);
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulo.TabIndex = 1;
             this.pbxArticulo.TabStop = false;
             // 
             // btnAnterior
             // 
-            this.btnAnterior.Location = new System.Drawing.Point(1165, 414);
-            this.btnAnterior.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAnterior.Location = new System.Drawing.Point(1162, 485);
+            this.btnAnterior.Margin = new System.Windows.Forms.Padding(4);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(100, 28);
             this.btnAnterior.TabIndex = 2;
@@ -76,8 +77,8 @@
             // 
             // btnSiguiente
             // 
-            this.btnSiguiente.Location = new System.Drawing.Point(1339, 414);
-            this.btnSiguiente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSiguiente.Location = new System.Drawing.Point(1336, 485);
+            this.btnSiguiente.Margin = new System.Windows.Forms.Padding(4);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(100, 28);
             this.btnSiguiente.TabIndex = 3;
@@ -88,7 +89,7 @@
             // lblCantidadImagenes
             // 
             this.lblCantidadImagenes.AutoSize = true;
-            this.lblCantidadImagenes.Location = new System.Drawing.Point(1285, 52);
+            this.lblCantidadImagenes.Location = new System.Drawing.Point(1284, 35);
             this.lblCantidadImagenes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCantidadImagenes.Name = "lblCantidadImagenes";
             this.lblCantidadImagenes.Size = new System.Drawing.Size(25, 16);
@@ -98,7 +99,7 @@
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(36, 539);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(100, 28);
             this.btnAgregar.TabIndex = 5;
@@ -106,18 +107,29 @@
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(178, 539);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(100, 28);
+            this.btnModificar.TabIndex = 6;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1557, 724);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.lblCantidadImagenes);
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.pbxArticulo);
             this.Controls.Add(this.dgvArticulos);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmArticulos";
             this.Text = "Articulos";
             this.Load += new System.EventHandler(this.frmArticulos_Load);
@@ -136,5 +148,6 @@
         private System.Windows.Forms.Button btnSiguiente;
         private System.Windows.Forms.Label lblCantidadImagenes;
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

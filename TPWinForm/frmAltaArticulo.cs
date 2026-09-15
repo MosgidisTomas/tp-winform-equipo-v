@@ -17,9 +17,17 @@ namespace TPWinForm
     {
 
         private const string ImagenPorDefecto = "https://placehold.co/300x300.png?text=Sin+Imagen";
+        private Articulo articulo = null;
         public frmAltaArticulo()
         {
             InitializeComponent();
+        }
+
+        public frmAltaArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modificar Articulo";
         }
 
         private void lblCodigo_Click(object sender, EventArgs e)
@@ -54,22 +62,31 @@ namespace TPWinForm
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-
-            Articulo nuevoArticulo = new Articulo();
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
 
             try
             {
-                nuevoArticulo.Codigo = txtCodigo.Text;
-                nuevoArticulo.Nombre = txtNombre.Text;
-                nuevoArticulo.Descripcion = txtDescripcion.Text;
-                nuevoArticulo.Precio = decimal.Parse(txtPrecio.Text);
-                nuevoArticulo.Marca = (Marca)cboMarca.SelectedItem;
-                nuevoArticulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                if(articulo == null)
+                    articulo = new Articulo();
 
-                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-                articuloNegocio.agregar(nuevoArticulo);
-
-                MessageBox.Show("Articulo agregado exitosamente");
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.Marca = (Marca)cboMarca.SelectedItem;
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                
+                
+                if(articulo.Id != 0)
+                {
+                    articuloNegocio.modificar(articulo);
+                    MessageBox.Show("Articulo modificado exitosamente");
+                }else
+                {
+                    articuloNegocio.agregar(articulo);
+                    MessageBox.Show("Articulo agregado exitosamente");
+                }
+                
                 Close();
             }
             catch (Exception ex)
@@ -96,6 +113,28 @@ namespace TPWinForm
                 cboMarca.DataSource = marcaNegocio.Listar();
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
+
+                if(articulo != null)
+                {
+                    txtCodigo.Text = articulo.Codigo;
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    cboMarca.SelectedValue = articulo.Marca.Id;
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
+
+                    if (articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+                    {
+                        cargarImagen(articulo.Imagenes[0].ImagenUrl);
+                        txtUrlImagen.Text = articulo.Imagenes[0].ImagenUrl;
+                    }
+                    else
+                    {
+                        cargarImagen(ImagenPorDefecto);
+                        txtUrlImagen.Text = "";
+                    }
+                        
+                }
             }
             catch (Exception ex)
             {
