@@ -174,5 +174,10 @@ namespace TPWinForm
                 }
             }
         }
+
+        private void pbxArticulo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
