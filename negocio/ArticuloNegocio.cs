@@ -78,19 +78,20 @@ namespace negocio
             return lista;
         }
 
-        public void agregar(Articulo nuevo)
+        public int agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
+                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio); SELECT SCOPE_IDENTITY();");
                 datos.setearParametro("@Codigo", nuevo.Codigo);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Descripcion", nuevo.Descripcion);
                 datos.setearParametro("@IdMarca", nuevo.Marca.Id);
                 datos.setearParametro("@IdCategoria", nuevo.Categoria.Id);
                 datos.setearParametro("@Precio", nuevo.Precio);
-                datos.ejecutarAccion();
+                object resultado = datos.ejecutarAccionEscalar();
+                return Convert.ToInt32(resultado);
             }
             catch (Exception ex)
             {
@@ -129,6 +130,9 @@ namespace negocio
 
         public void eliminar(int id)
         {
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+            imagenNegocio.eliminarPorArticulo(id);
+
             AccesoDatos datos = new AccesoDatos();
             try
             {

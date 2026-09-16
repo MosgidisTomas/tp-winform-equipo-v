@@ -36,6 +36,7 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminarFisico = new System.Windows.Forms.Button();
+            this.btnMarcas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -123,12 +124,23 @@
             this.btnEliminarFisico.Text = "Eliminar Físico";
             this.btnEliminarFisico.UseVisualStyleBackColor = true;
             this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
-            // 
+            //
+            // btnMarcas
+            //
+            this.btnMarcas.Location = new System.Drawing.Point(369, 438);
+            this.btnMarcas.Name = "btnMarcas";
+            this.btnMarcas.Size = new System.Drawing.Size(90, 23);
+            this.btnMarcas.TabIndex = 8;
+            this.btnMarcas.Text = "Marcas";
+            this.btnMarcas.UseVisualStyleBackColor = true;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
+            //
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 588);
+            this.Controls.Add(this.btnMarcas);
             this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
@@ -157,5 +169,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminarFisico;
+        private System.Windows.Forms.Button btnMarcas;
     }
 }

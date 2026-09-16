@@ -17,7 +17,10 @@ namespace TPWinForm
     {
 
         private const string ImagenPorDefecto = "https://placehold.co/300x300.png?text=Sin+Imagen";
+        private const int MaximoImagenes = 3;
         private Articulo articulo = null;
+        private List<string> imagenes = new List<string>();
+        private int indiceImagenActual = 0;
         public frmAltaArticulo()
         {
             InitializeComponent();
@@ -80,10 +83,35 @@ namespace TPWinForm
                 if(articulo.Id != 0)
                 {
                     articuloNegocio.modificar(articulo);
+
+                    ImagenNegocio imagenNegocioMod = new ImagenNegocio();
+                    imagenNegocioMod.eliminarPorArticulo(articulo.Id);
+                    foreach (string url in imagenes)
+                    {
+                        if (string.IsNullOrWhiteSpace(url)) continue;
+
+                        Imagen imagen = new Imagen();
+                        imagen.IdArticulo = articulo.Id;
+                        imagen.ImagenUrl = url;
+                        imagenNegocioMod.agregar(imagen);
+                    }
+
                     MessageBox.Show("Articulo modificado exitosamente");
                 }else
                 {
-                    articuloNegocio.agregar(articulo);
+                    articulo.Id = articuloNegocio.agregar(articulo);
+
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+                    foreach (string url in imagenes)
+                    {
+                        if (string.IsNullOrWhiteSpace(url)) continue;
+
+                        Imagen imagen = new Imagen();
+                        imagen.IdArticulo = articulo.Id;
+                        imagen.ImagenUrl = url;
+                        imagenNegocio.agregar(imagen);
+                    }
+
                     MessageBox.Show("Articulo agregado exitosamente");
                 }
                 
@@ -123,23 +151,42 @@ namespace TPWinForm
                     cboMarca.SelectedValue = articulo.Marca.Id;
                     cboCategoria.SelectedValue = articulo.Categoria.Id;
 
-                    if (articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+                    if (articulo.Imagenes != null)
                     {
-                        cargarImagen(articulo.Imagenes[0].ImagenUrl);
-                        txtUrlImagen.Text = articulo.Imagenes[0].ImagenUrl;
+                        foreach (Imagen imagen in articulo.Imagenes)
+                            imagenes.Add(imagen.ImagenUrl);
                     }
-                    else
-                    {
-                        cargarImagen(ImagenPorDefecto);
-                        txtUrlImagen.Text = "";
-                    }
-                        
                 }
+
+                indiceImagenActual = 0;
+                MostrarImagenActual();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void MostrarImagenActual()
+        {
+            if (imagenes.Count == 0)
+            {
+                txtUrlImagen.Text = "";
+                cargarImagen(ImagenPorDefecto);
+            }
+            else
+            {
+                if (indiceImagenActual < 0) indiceImagenActual = 0;
+                if (indiceImagenActual >= imagenes.Count) indiceImagenActual = imagenes.Count - 1;
+
+                txtUrlImagen.Text = imagenes[indiceImagenActual];
+                cargarImagen(imagenes[indiceImagenActual]);
+            }
+
+            btnAnterior.Enabled = indiceImagenActual > 0;
+            btnSiguiente.Enabled = indiceImagenActual < imagenes.Count - 1;
+            btnAgregarImagen.Text = "Agregar (" + imagenes.Count + "/" + MaximoImagenes + ")";
+            btnAgregarImagen.Enabled = imagenes.Count < MaximoImagenes;
         }
         private void cboCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -153,7 +200,42 @@ namespace TPWinForm
 
         private void txtUrlImagen_Leave(object sender, EventArgs e)
         {
+            if (imagenes.Count > 0)
+                imagenes[indiceImagenActual] = txtUrlImagen.Text.Trim();
+
             cargarImagen(txtUrlImagen.Text);
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            if (imagenes.Count >= MaximoImagenes)
+            {
+                MessageBox.Show("Ya alcanzo el maximo de " + MaximoImagenes + " imagenes.");
+                return;
+            }
+
+            imagenes.Add("");
+            indiceImagenActual = imagenes.Count - 1;
+            MostrarImagenActual();
+            txtUrlImagen.Focus();
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            if (indiceImagenActual > 0)
+            {
+                indiceImagenActual--;
+                MostrarImagenActual();
+            }
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            if (indiceImagenActual < imagenes.Count - 1)
+            {
+                indiceImagenActual++;
+                MostrarImagenActual();
+            }
         }
 
         private void cargarImagen(string imagen)

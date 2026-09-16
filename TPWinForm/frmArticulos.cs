@@ -152,6 +152,13 @@ namespace TPWinForm
             cargar();
         }
 
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            frmMarcas marcas = new frmMarcas();
+            marcas.ShowDialog();
+            cargar();
+        }
+
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
