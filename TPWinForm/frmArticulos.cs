@@ -24,7 +24,12 @@ namespace TPWinForm
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             cargar();
+            cbCampo.Items.Add("Codigo");
+            cbCampo.Items.Add("Nombre");
+            cbCampo.Items.Add("Marca");
+            cbCampo.Items.Add("Categoria");
         }
+
 
         private void cargar()
         {
@@ -179,6 +184,88 @@ namespace TPWinForm
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                string campo = cbCampo.SelectedItem.ToString();
+                string criterio = cbCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                throw;
+            }
+
+
+        }
+
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltro.Text;
+
+            if (filtro.Length >= 2)
+            {
+                listaFiltrada = listaArticulos.FindAll(x => x.Codigo.ToUpper().Contains(filtro.ToUpper()) || x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaArticulos;
+            }
+
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = listaFiltrada;
+        }
+
+        private void gbFiltroAvanzado_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbCriterio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cbCampo.SelectedItem.ToString();
+            if(opcion == "Codigo")
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Mayor a");
+                cbCriterio.Items.Add("Menor a");
+                cbCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Comienza con");
+                cbCriterio.Items.Add("Termina Con");
+                cbCriterio.Items.Add("Contiene");
+            }
         }
     }
 }
