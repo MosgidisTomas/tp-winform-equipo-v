@@ -21,10 +21,10 @@ namespace TPWinForm
 
         private void frmMarcas_Load(object sender, EventArgs e)
         {
-            cargar();
+            cargarMarca();
         }
 
-        private void cargar()
+        private void cargarMarca()
         {
             MarcaNegocio negocio = new MarcaNegocio();
             try
@@ -41,7 +41,7 @@ namespace TPWinForm
         {
             frmAltaMarca altaMarca = new frmAltaMarca();
             altaMarca.ShowDialog();
-            cargar();
+            cargarMarca();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace TPWinForm
             Marca seleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
             frmAltaMarca modificarMarca = new frmAltaMarca(seleccionada);
             modificarMarca.ShowDialog();
-            cargar();
+            cargarMarca();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -74,13 +74,18 @@ namespace TPWinForm
                 if (respuesta == DialogResult.Yes)
                 {
                     negocio.eliminar(seleccionada.Id);
-                    cargar();
+                    cargarMarca();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void dgvMarcas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

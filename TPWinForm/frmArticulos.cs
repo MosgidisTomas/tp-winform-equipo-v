@@ -267,5 +267,12 @@ namespace TPWinForm
                 cbCriterio.Items.Add("Contiene");
             }
         }
+
+        private void btnCategorias_Click(object sender, EventArgs e)
+        {
+            frmCategoria categorias = new frmCategoria();
+            categorias.ShowDialog();
+            cargar();
+        }
     }
 }

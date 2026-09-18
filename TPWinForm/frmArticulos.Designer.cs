@@ -47,6 +47,7 @@
             this.lblCriterio = new System.Windows.Forms.Label();
             this.txtFiltroAvanzado = new System.Windows.Forms.TextBox();
             this.cbCampo = new System.Windows.Forms.ComboBox();
+            this.btnCategorias = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -126,7 +127,7 @@
             // 
             // btnEliminarFisico
             // 
-            this.btnEliminarFisico.Location = new System.Drawing.Point(192, 381);
+            this.btnEliminarFisico.Location = new System.Drawing.Point(196, 381);
             this.btnEliminarFisico.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminarFisico.Name = "btnEliminarFisico";
             this.btnEliminarFisico.Size = new System.Drawing.Size(90, 23);
@@ -137,7 +138,7 @@
             // 
             // btnMarcas
             // 
-            this.btnMarcas.Location = new System.Drawing.Point(282, 381);
+            this.btnMarcas.Location = new System.Drawing.Point(291, 381);
             this.btnMarcas.Name = "btnMarcas";
             this.btnMarcas.Size = new System.Drawing.Size(90, 23);
             this.btnMarcas.TabIndex = 8;
@@ -237,11 +238,22 @@
             this.cbCampo.TabIndex = 21;
             this.cbCampo.SelectedIndexChanged += new System.EventHandler(this.cbCampo_SelectedIndexChanged);
             // 
+            // btnCategorias
+            // 
+            this.btnCategorias.Location = new System.Drawing.Point(387, 381);
+            this.btnCategorias.Name = "btnCategorias";
+            this.btnCategorias.Size = new System.Drawing.Size(90, 23);
+            this.btnCategorias.TabIndex = 22;
+            this.btnCategorias.Text = "Categorias";
+            this.btnCategorias.UseVisualStyleBackColor = true;
+            this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 494);
+            this.Controls.Add(this.btnCategorias);
             this.Controls.Add(this.cbCampo);
             this.Controls.Add(this.btnMarcas);
             this.Controls.Add(this.txtFiltroAvanzado);
@@ -292,5 +304,6 @@
         private System.Windows.Forms.Label lblCriterio;
         private System.Windows.Forms.TextBox txtFiltroAvanzado;
         private System.Windows.Forms.ComboBox cbCampo;
+        private System.Windows.Forms.Button btnCategorias;
     }
 }
