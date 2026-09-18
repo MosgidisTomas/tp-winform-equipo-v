@@ -48,6 +48,7 @@
             this.txtFiltroAvanzado = new System.Windows.Forms.TextBox();
             this.cbCampo = new System.Windows.Forms.ComboBox();
             this.btnCategorias = new System.Windows.Forms.Button();
+            this.btnImagenes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -247,12 +248,23 @@
             this.btnCategorias.Text = "Categorias";
             this.btnCategorias.UseVisualStyleBackColor = true;
             this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
-            // 
+            //
+            // btnImagenes
+            //
+            this.btnImagenes.Location = new System.Drawing.Point(483, 381);
+            this.btnImagenes.Name = "btnImagenes";
+            this.btnImagenes.Size = new System.Drawing.Size(90, 23);
+            this.btnImagenes.TabIndex = 23;
+            this.btnImagenes.Text = "Imagenes";
+            this.btnImagenes.UseVisualStyleBackColor = true;
+            this.btnImagenes.Click += new System.EventHandler(this.btnImagenes_Click);
+            //
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 494);
+            this.Controls.Add(this.btnImagenes);
             this.Controls.Add(this.btnCategorias);
             this.Controls.Add(this.cbCampo);
             this.Controls.Add(this.btnMarcas);
@@ -305,5 +317,6 @@
         private System.Windows.Forms.TextBox txtFiltroAvanzado;
         private System.Windows.Forms.ComboBox cbCampo;
         private System.Windows.Forms.Button btnCategorias;
+        private System.Windows.Forms.Button btnImagenes;
     }
 }

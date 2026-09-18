@@ -85,6 +85,18 @@
     <Compile Include="frmAltaMarca.Designer.cs">
       <DependentUpon>frmAltaMarca.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmImagenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImagenes.Designer.cs">
+      <DependentUpon>frmImagenes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmModificarImagen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModificarImagen.Designer.cs">
+      <DependentUpon>frmModificarImagen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAltaArticulo.resx">
@@ -101,6 +113,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarcas.resx">
       <DependentUpon>frmMarcas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImagenes.resx">
+      <DependentUpon>frmImagenes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModificarImagen.resx">
+      <DependentUpon>frmModificarImagen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAltaMarca.resx">
       <DependentUpon>frmAltaMarca.cs</DependentUpon>

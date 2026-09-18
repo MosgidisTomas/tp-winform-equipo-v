@@ -164,6 +164,13 @@ namespace TPWinForm
             cargar();
         }
 
+        private void btnImagenes_Click(object sender, EventArgs e)
+        {
+            frmImagenes imagenes = new frmImagenes();
+            imagenes.ShowDialog();
+            cargar();
+        }
+
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
