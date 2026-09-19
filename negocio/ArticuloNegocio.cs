@@ -134,43 +134,50 @@ namespace negocio
             try
             {
                 string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.Precio FROM ARTICULOS A LEFT JOIN MARCAS M ON A.IdMarca = M.Id LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id WHERE ";
-                string columna;
-                if (campo == "Nombre") columna = "A.Nombre";
-                else if (campo == "Marca") columna = "M.Descripcion";
-                else columna = "C.Descripcion"; 
 
-                if (campo == "Numero")
+                if (campo == "Precio")
                 {
                     switch (criterio)
                     {
                         case "Mayor a":
-                            consulta += "A.Codigo > '" + filtro + "'";
+                            consulta += "A.Precio > @filtro";
                             break;
                         case "Menor a":
-                            consulta += "A.Codigo < '" + filtro + "'";
+                            consulta += "A.Precio < @filtro";
                             break;
                         default:
-                            consulta += "A.Codigo = '" + filtro + "'";
+                            consulta += "A.Precio = @filtro";
                             break;
                     }
+
+                    datos.setearConsulta(consulta);
+                    datos.setearParametro("@filtro", decimal.Parse(filtro));
                 }
                 else
                 {
+                    string columna;
+                    if (campo == "Codigo") columna = "A.Codigo";
+                    else if (campo == "Nombre") columna = "A.Nombre";
+                    else if (campo == "Marca") columna = "M.Descripcion";
+                    else columna = "C.Descripcion";
+
+                    consulta += columna + " LIKE @filtro";
+                    datos.setearConsulta(consulta);
+
                     switch (criterio)
                     {
-                        case "Comienza con ":
-                            consulta += columna + " like '" + filtro + "%'";
+                        case "Comienza con":
+                            datos.setearParametro("@filtro", filtro + "%");
                             break;
                         case "Termina con":
-                            consulta += columna + " like '%" + filtro + "'";
+                            datos.setearParametro("@filtro", "%" + filtro);
                             break;
                         default:
-                            consulta += columna + " like '%" + filtro + "%'";
+                            datos.setearParametro("@filtro", "%" + filtro + "%");
                             break;
                     }
                 }
 
-                datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -214,13 +221,26 @@ namespace negocio
 
                     lista.Add(aux);
                 }
+
+                datos.cerrarConexion();
+
+                foreach (Articulo aux in lista)
+                {
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+                    aux.Imagenes = imagenNegocio.listar(aux.Id);
+                }
+
                 return lista;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        } 
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminar(int id)
         {
             ImagenNegocio imagenNegocio = new ImagenNegocio();

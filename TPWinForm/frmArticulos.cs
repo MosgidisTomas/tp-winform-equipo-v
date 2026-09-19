@@ -16,6 +16,12 @@ namespace TPWinForm
     {
         private const string ImagenPorDefecto = "https://placehold.co/300x300.png?text=Sin+Imagen";
         private List<Articulo> listaArticulos;
+
+        // Filtro avanzado en uso (null = sin filtro avanzado)
+        private string campoActivo = null;
+        private string criterioActivo = null;
+        private string filtroActivo = null;
+
         public frmArticulos()
         {
             InitializeComponent();
@@ -28,6 +34,7 @@ namespace TPWinForm
             cbCampo.Items.Add("Nombre");
             cbCampo.Items.Add("Marca");
             cbCampo.Items.Add("Categoria");
+            cbCampo.Items.Add("Precio");
         }
 
 
@@ -36,13 +43,46 @@ namespace TPWinForm
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-                listaArticulos = negocio.Listar();
-                dgvArticulos.DataSource = listaArticulos;
-                pbxArticulo.Load(listaArticulos[0].Imagenes[0].ImagenUrl);
+                if (campoActivo != null)
+                    listaArticulos = negocio.filtrar(campoActivo, criterioActivo, filtroActivo);
+                else
+                    listaArticulos = negocio.Listar();
+
+                aplicarFiltroRapido();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void aplicarFiltroRapido()
+        {
+            if (listaArticulos == null)
+                return;
+
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltro.Text.ToUpper();
+
+            if (filtro.Length >= 2)
+            {
+                listaFiltrada = listaArticulos.FindAll(x =>
+                    (x.Codigo ?? "").ToUpper().Contains(filtro) ||
+                    (x.Nombre ?? "").ToUpper().Contains(filtro) ||
+                    (x.Marca.Descripcion ?? "").ToUpper().Contains(filtro));
+            }
+            else
+            {
+                listaFiltrada = listaArticulos;
+            }
+
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = listaFiltrada;
+
+            if (listaFiltrada.Count == 0)
+            {
+                cargarImagen(ImagenPorDefecto);
+                lblCantidadImagenes.Text = "0/0";
             }
         }
 
@@ -200,22 +240,44 @@ namespace TPWinForm
 
         private void lblBuscar_Click(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            try
+            if (cbCampo.SelectedItem == null || cbCriterio.SelectedItem == null)
             {
-                string campo = cbCampo.SelectedItem.ToString();
-                string criterio = cbCriterio.SelectedItem.ToString();
-                string filtro = txtFiltroAvanzado.Text;
-                dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                throw;
+                MessageBox.Show("Seleccione un campo y un criterio.");
+                return;
             }
 
+            string campo = cbCampo.SelectedItem.ToString();
+            string criterio = cbCriterio.SelectedItem.ToString();
+            string filtro = txtFiltroAvanzado.Text.Trim();
 
+            if (campo == "Precio")
+            {
+                decimal precio;
+                if (!decimal.TryParse(filtro, out precio))
+                {
+                    MessageBox.Show("Ingrese un precio valido.");
+                    return;
+                }
+            }
+
+            campoActivo = campo;
+            criterioActivo = criterio;
+            filtroActivo = filtro;
+            cargar();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            campoActivo = null;
+            criterioActivo = null;
+            filtroActivo = null;
+
+            cbCampo.SelectedIndex = -1;
+            cbCriterio.Items.Clear();
+            txtFiltroAvanzado.Text = "";
+            txtFiltro.Text = "";
+
+            cargar();
         }
 
         private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
@@ -225,20 +287,7 @@ namespace TPWinForm
 
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
-            List<Articulo> listaFiltrada;
-            string filtro = txtFiltro.Text;
-
-            if (filtro.Length >= 2)
-            {
-                listaFiltrada = listaArticulos.FindAll(x => x.Codigo.ToUpper().Contains(filtro.ToUpper()) || x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper()));
-            }
-            else
-            {
-                listaFiltrada = listaArticulos;
-            }
-
-            dgvArticulos.DataSource = null;
-            dgvArticulos.DataSource = listaFiltrada;
+            aplicarFiltroRapido();
         }
 
         private void gbFiltroAvanzado_Enter(object sender, EventArgs e)
@@ -258,19 +307,22 @@ namespace TPWinForm
 
         private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cbCriterio.Items.Clear();
+
+            if (cbCampo.SelectedItem == null)
+                return;
+
             string opcion = cbCampo.SelectedItem.ToString();
-            if(opcion == "Codigo")
+            if (opcion == "Precio")
             {
-                cbCriterio.Items.Clear();
                 cbCriterio.Items.Add("Mayor a");
                 cbCriterio.Items.Add("Menor a");
                 cbCriterio.Items.Add("Igual a");
             }
             else
             {
-                cbCriterio.Items.Clear();
                 cbCriterio.Items.Add("Comienza con");
-                cbCriterio.Items.Add("Termina Con");
+                cbCriterio.Items.Add("Termina con");
                 cbCriterio.Items.Add("Contiene");
             }
         }

@@ -40,6 +40,7 @@
             this.lblFiltroRapido = new System.Windows.Forms.Label();
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.lblBuscar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbCriterio = new System.Windows.Forms.ComboBox();
             this.lblCampo = new System.Windows.Forms.Label();
@@ -175,6 +176,16 @@
             this.lblBuscar.Text = "Buscar";
             this.lblBuscar.UseVisualStyleBackColor = true;
             this.lblBuscar.Click += new System.EventHandler(this.lblBuscar_Click);
+            //
+            // btnLimpiar
+            //
+            this.btnLimpiar.Location = new System.Drawing.Point(514, 461);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(121, 21);
+            this.btnLimpiar.TabIndex = 24;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // label1
             // 
@@ -275,6 +286,7 @@
             this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.lblCriterio);
             this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.lblFiltroRapido);
             this.Controls.Add(this.lblFiltroAvanzado);
@@ -309,6 +321,7 @@
         private System.Windows.Forms.Label lblFiltroRapido;
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.Button lblBuscar;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbCriterio;
         private System.Windows.Forms.Label lblCampo;
