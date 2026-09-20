@@ -87,7 +87,6 @@ namespace negocio
                     throw new Exception("No se puede eliminar la categoria: tiene " + cantidadArticulos + " articulo(s) asociado(s).");
 
                 datos.setearConsulta("DELETE FROM CATEGORIAS WHERE Id = @Id");
-                datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

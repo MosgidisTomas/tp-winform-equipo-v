@@ -86,11 +86,6 @@ namespace TPWinForm
             }
         }
 
-        private void dgvArticulos_SystemColorsChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private int indiceImagen = 0;
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
@@ -233,11 +228,6 @@ namespace TPWinForm
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void lblBuscar_Click(object sender, EventArgs e)
         {
             if (cbCampo.SelectedItem == null || cbCriterio.SelectedItem == null)
@@ -280,29 +270,9 @@ namespace TPWinForm
             cargar();
         }
 
-        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           
-        }
-
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
             aplicarFiltroRapido();
-        }
-
-        private void gbFiltroAvanzado_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbCriterio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)

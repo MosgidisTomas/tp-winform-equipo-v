@@ -33,36 +33,6 @@ namespace TPWinForm
             Text = "Modificar Articulo";
         }
 
-        private void lblCodigo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNombre_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDescripcion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPrecio_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMarca_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCategoria_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private bool validarCampos()
         {
             if (string.IsNullOrWhiteSpace(txtCodigo.Text))
@@ -281,16 +251,6 @@ namespace TPWinForm
             btnSiguiente.Enabled = indiceImagenActual < imagenes.Count - 1;
             btnQuitarImagen.Enabled = imagenes.Count > 0;
         }
-        private void cboCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboMarca_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtUrlImagen_Leave(object sender, EventArgs e)
         {
             if (imagenes.Count > 0)
@@ -366,9 +326,5 @@ namespace TPWinForm
             }
         }
 
-        private void pbxArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

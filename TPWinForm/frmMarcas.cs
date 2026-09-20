@@ -83,9 +83,5 @@ namespace TPWinForm
             }
         }
 
-        private void dgvMarcas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }
