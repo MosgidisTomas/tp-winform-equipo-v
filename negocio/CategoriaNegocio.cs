@@ -79,6 +79,13 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
+                datos.setearConsulta("SELECT COUNT(*) FROM ARTICULOS WHERE IdCategoria = @Id");
+                datos.setearParametro("@Id", id);
+                int cantidadArticulos = Convert.ToInt32(datos.ejecutarAccionEscalar());
+
+                if (cantidadArticulos > 0)
+                    throw new Exception("No se puede eliminar la categoria: tiene " + cantidadArticulos + " articulo(s) asociado(s).");
+
                 datos.setearConsulta("DELETE FROM CATEGORIAS WHERE Id = @Id");
                 datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();

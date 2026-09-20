@@ -48,6 +48,12 @@ namespace TPWinForm
                     return;
                 }
 
+                if (txtDescripcion.Text.Trim().Length > 50)
+                {
+                    MessageBox.Show("La descripcion no puede superar los 50 caracteres.");
+                    return;
+                }
+
                 if (marca == null)
                     marca = new Marca();
 

@@ -48,6 +48,7 @@
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnQuitarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,6 +99,7 @@
             // 
             this.txtCodigo.Location = new System.Drawing.Point(43, 46);
             this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigo.MaxLength = 50;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(309, 22);
             this.txtCodigo.TabIndex = 0;
@@ -106,6 +108,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(43, 110);
             this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(309, 22);
             this.txtNombre.TabIndex = 1;
@@ -114,6 +117,7 @@
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(43, 166);
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcion.MaxLength = 150;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(309, 91);
@@ -205,6 +209,7 @@
             // 
             this.txtUrlImagen.Location = new System.Drawing.Point(43, 362);
             this.txtUrlImagen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtUrlImagen.MaxLength = 1000;
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(252, 22);
             this.txtUrlImagen.TabIndex = 4;
@@ -217,7 +222,7 @@
             this.btnAgregarImagen.Name = "btnAgregarImagen";
             this.btnAgregarImagen.Size = new System.Drawing.Size(121, 32);
             this.btnAgregarImagen.TabIndex = 13;
-            this.btnAgregarImagen.Text = "Agregar (0/3)";
+            this.btnAgregarImagen.Text = "Agregar imagen";
             this.btnAgregarImagen.UseVisualStyleBackColor = true;
             this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
             // 
@@ -254,11 +259,23 @@
             this.btnSiguiente.UseVisualStyleBackColor = true;
             this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
             //
+            // btnQuitarImagen
+            //
+            this.btnQuitarImagen.Location = new System.Drawing.Point(628, 470);
+            this.btnQuitarImagen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnQuitarImagen.Name = "btnQuitarImagen";
+            this.btnQuitarImagen.Size = new System.Drawing.Size(121, 32);
+            this.btnQuitarImagen.TabIndex = 17;
+            this.btnQuitarImagen.Text = "Quitar imagen";
+            this.btnQuitarImagen.UseVisualStyleBackColor = true;
+            this.btnQuitarImagen.Click += new System.EventHandler(this.btnQuitarImagen_Click);
+            //
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 647);
+            this.Controls.Add(this.btnQuitarImagen);
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.pbxArticulo);
@@ -312,5 +329,6 @@
         private System.Windows.Forms.PictureBox pbxArticulo;
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnQuitarImagen;
     }
 }

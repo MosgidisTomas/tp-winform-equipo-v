@@ -46,6 +46,7 @@ namespace TPWinForm
             // txtDescripcion
             //
             this.txtDescripcion.Location = new System.Drawing.Point(23, 36);
+            this.txtDescripcion.MaxLength = 50;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(233, 20);
             this.txtDescripcion.TabIndex = 1;

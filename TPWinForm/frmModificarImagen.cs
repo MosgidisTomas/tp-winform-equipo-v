@@ -67,6 +67,12 @@ namespace TPWinForm
                     return;
                 }
 
+                if (txtUrlImagen.Text.Trim().Length > 1000)
+                {
+                    MessageBox.Show("La URL no puede superar los 1000 caracteres.");
+                    return;
+                }
+
                 imagen.ImagenUrl = txtUrlImagen.Text.Trim();
                 imagenNegocio.modificar(imagen);
 

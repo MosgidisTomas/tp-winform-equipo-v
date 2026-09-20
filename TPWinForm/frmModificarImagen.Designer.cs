@@ -58,6 +58,7 @@ namespace TPWinForm
             // txtUrlImagen
             //
             this.txtUrlImagen.Location = new System.Drawing.Point(23, 66);
+            this.txtUrlImagen.MaxLength = 1000;
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(330, 20);
             this.txtUrlImagen.TabIndex = 2;

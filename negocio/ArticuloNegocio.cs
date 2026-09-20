@@ -103,6 +103,28 @@ namespace negocio
             }
         }
 
+        public bool existeCodigo(string codigo, int idExcluir)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM ARTICULOS WHERE Codigo = @Codigo AND Id <> @Id");
+                datos.setearParametro("@Codigo", codigo);
+                datos.setearParametro("@Id", idExcluir);
+                int cantidad = Convert.ToInt32(datos.ejecutarAccionEscalar());
+
+                return cantidad > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void modificar(Articulo articulo)
         {
             AccesoDatos datos = new AccesoDatos();

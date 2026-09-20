@@ -58,6 +58,7 @@
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(39, 43);
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcion.MaxLength = 50;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(309, 22);
             this.txtDescripcion.TabIndex = 5;
