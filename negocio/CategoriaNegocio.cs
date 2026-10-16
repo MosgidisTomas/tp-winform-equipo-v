@@ -34,15 +34,39 @@ namespace negocio
             }
             return lista;
         }
-
-        public void agregar(Categoria nueva)
+        public bool existe(string descripcion, int idExcluir = 0)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
+                datos.setearConsulta("SELECT COUNT(*) FROM CATEGORIAS WHERE LOWER(LTRIM(RTRIM(Descripcion))) = LOWER(@Descripcion) AND Id <> @Id");
+                datos.setearParametro("@Descripcion", descripcion.Trim());
+                datos.setearParametro("@Id", idExcluir);
+                object resultado = datos.ejecutarAccionEscalar();
+                return Convert.ToInt32(resultado) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool agregar(Categoria nueva)
+        {
+            if (existe(nueva.Descripcion))
+                return false;
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
                 datos.setearConsulta("INSERT INTO CATEGORIAS (Descripcion) VALUES (@Descripcion)");
-                datos.setearParametro("@Descripcion", nueva.Descripcion);
+                datos.setearParametro("@Descripcion", nueva.Descripcion.Trim());
                 datos.ejecutarAccion();
+                return true;
             }
             catch (Exception ex)
             {

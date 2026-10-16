@@ -53,19 +53,30 @@ namespace TPWinForm
                     return;
                 }
 
+                string descripcion = txtDescripcion.Text.Trim();
+
                 if (categoria == null)
                     categoria = new Categoria();
 
-                categoria.Descripcion = txtDescripcion.Text.Trim();
-
                 if (categoria.Id != 0)
                 {
+                    if (categoriaNegocio.existe(descripcion, categoria.Id))
+                    {
+                        MessageBox.Show("Ya existe una categoria con esa descripcion.");
+                        return;
+                    }
+                    categoria.Descripcion = descripcion;
                     categoriaNegocio.modificar(categoria);
                     MessageBox.Show("Categoría modificada exitosamente");
                 }
                 else
                 {
-                    categoriaNegocio.agregar(categoria);
+                    categoria.Descripcion = descripcion;
+                    if (!categoriaNegocio.agregar(categoria))
+                    {
+                        MessageBox.Show("Ya existe una categoria con esa descripcion.");
+                        return;
+                    }
                     MessageBox.Show("Categoría agregada exitosamente");
                 }
 

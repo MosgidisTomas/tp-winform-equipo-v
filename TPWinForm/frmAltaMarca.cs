@@ -61,12 +61,21 @@ namespace TPWinForm
 
                 if (marca.Id != 0)
                 {
+                    if (marcaNegocio.existe(marca.Descripcion, marca.Id))
+                    {
+                        MessageBox.Show("Ya existe una marca con esa descripcion.");
+                        return;
+                    }
                     marcaNegocio.modificar(marca);
                     MessageBox.Show("Marca modificada exitosamente");
                 }
                 else
                 {
-                    marcaNegocio.agregar(marca);
+                    if (!marcaNegocio.agregar(marca))
+                    {
+                        MessageBox.Show("Ya existe una marca con esa descripcion.");
+                        return;
+                    }
                     MessageBox.Show("Marca agregada exitosamente");
                 }
 
