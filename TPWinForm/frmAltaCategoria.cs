@@ -84,7 +84,7 @@ namespace TPWinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("No se pudo completar la operacion con la categoria.");
             }
         }
 

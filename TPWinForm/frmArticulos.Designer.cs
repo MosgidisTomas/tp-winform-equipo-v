@@ -50,6 +50,7 @@
             this.cbCampo = new System.Windows.Forms.ComboBox();
             this.btnCategorias = new System.Windows.Forms.Button();
             this.btnImagenes = new System.Windows.Forms.Button();
+            this.btnDetalle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -267,11 +268,22 @@
             this.btnImagenes.UseVisualStyleBackColor = true;
             this.btnImagenes.Click += new System.EventHandler(this.btnImagenes_Click);
             // 
+            // btnDetalle
+            // 
+            this.btnDetalle.Location = new System.Drawing.Point(691, 381);
+            this.btnDetalle.Name = "btnDetalle";
+            this.btnDetalle.Size = new System.Drawing.Size(75, 23);
+            this.btnDetalle.TabIndex = 25;
+            this.btnDetalle.Text = "Ver detalle";
+            this.btnDetalle.UseVisualStyleBackColor = true;
+            this.btnDetalle.Click += new System.EventHandler(this.btnDetalle_Click);
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 494);
+            this.Controls.Add(this.btnDetalle);
             this.Controls.Add(this.btnImagenes);
             this.Controls.Add(this.btnCategorias);
             this.Controls.Add(this.cbCampo);
@@ -328,5 +340,6 @@
         private System.Windows.Forms.ComboBox cbCampo;
         private System.Windows.Forms.Button btnCategorias;
         private System.Windows.Forms.Button btnImagenes;
+        private System.Windows.Forms.Button btnDetalle;
     }
 }

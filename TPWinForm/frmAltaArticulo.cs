@@ -171,7 +171,7 @@ namespace TPWinForm
                         imagenNegocio.agregar(imagen);
                     }
 
-                    MessageBox.Show("Articulo agregado exitosamente");
+                    Mensajes.Error("Articulo agregado exitosamente");
                 }
                 
                 Close();
@@ -179,7 +179,7 @@ namespace TPWinForm
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("No se pudo guardar el artículo. Verifique los datos e intente nuevamente");
             }
         }
 
@@ -225,7 +225,7 @@ namespace TPWinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("No se pudieron cargar los datos del formulario. Intente nuevamente.", ex);
             }
         }
 

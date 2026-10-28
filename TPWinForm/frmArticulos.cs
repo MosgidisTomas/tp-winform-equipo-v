@@ -65,7 +65,7 @@ namespace TPWinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("No se pudieron cargar los artículos. Intente nuevamente.", ex);
             }
         }
 
@@ -198,11 +198,23 @@ namespace TPWinForm
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Articulo seleccionado;
-            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            frmAltaArticulo modificarAriculo = new frmAltaArticulo(seleccionado);
-            modificarAriculo.ShowDialog();
-            cargar();
+            if (dgvArticulos.CurrentRow == null)
+            {
+                Mensajes.Aviso("Seleccione un artículo para modificar.");
+                return;
+            }
+
+            try
+            {
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                frmAltaArticulo modificarArticulo = new frmAltaArticulo(seleccionado);
+                modificarArticulo.ShowDialog();
+                cargar();
+            }
+            catch (Exception ex)
+            {
+                Mensajes.Error("No se pudo abrir el artículo para modificarlo. Intente nuevamente.", ex);
+            }
         }
 
         private void btnMarcas_Click(object sender, EventArgs e)
@@ -236,7 +248,7 @@ namespace TPWinForm
             catch (Exception ex)    
             {
 
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("No se pudo eliminar el artículo. Intente nuevamente.", ex);
             }
 
         }
@@ -319,6 +331,18 @@ namespace TPWinForm
         private void dgvArticulos_DataBindingComplete_1(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ocultarColumnas();
+        }
+
+        private void btnDetalle_Click(object sender, EventArgs e)
+        {
+            if (dgvArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un artículo para ver su detalle.");
+                return;
+            }
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmDetalleArticulo detalle = new frmDetalleArticulo(seleccionado);
+            detalle.ShowDialog();
         }
     }
 }

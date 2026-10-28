@@ -35,7 +35,7 @@ namespace TPWinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("No se pudo cargar la imagen con exito.");
             }
         }
 

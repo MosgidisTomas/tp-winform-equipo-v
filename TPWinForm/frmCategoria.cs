@@ -33,7 +33,7 @@ namespace TPWinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("No se pudo listar las categorias con exito.");
             }
         }
 

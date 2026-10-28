@@ -81,7 +81,7 @@ namespace TPWinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Mensajes.Error("Error al modificar la imagen.");
             }
         }
 
