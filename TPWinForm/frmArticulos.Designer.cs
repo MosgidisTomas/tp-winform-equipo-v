@@ -65,6 +65,7 @@
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvArticulos.Size = new System.Drawing.Size(754, 314);
             this.dgvArticulos.TabIndex = 0;
+            this.dgvArticulos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvArticulos_DataBindingComplete_1);
             this.dgvArticulos.SelectionChanged += new System.EventHandler(this.dgvArticulos_SelectionChanged);
             // 
             // pbxArticulo
@@ -173,9 +174,9 @@
             this.lblBuscar.Text = "Buscar";
             this.lblBuscar.UseVisualStyleBackColor = true;
             this.lblBuscar.Click += new System.EventHandler(this.lblBuscar_Click);
-            //
+            // 
             // btnLimpiar
-            //
+            // 
             this.btnLimpiar.Location = new System.Drawing.Point(514, 461);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(121, 21);
@@ -255,9 +256,9 @@
             this.btnCategorias.Text = "Categorias";
             this.btnCategorias.UseVisualStyleBackColor = true;
             this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
-            //
+            // 
             // btnImagenes
-            //
+            // 
             this.btnImagenes.Location = new System.Drawing.Point(483, 381);
             this.btnImagenes.Name = "btnImagenes";
             this.btnImagenes.Size = new System.Drawing.Size(90, 23);
@@ -265,7 +266,7 @@
             this.btnImagenes.Text = "Imagenes";
             this.btnImagenes.UseVisualStyleBackColor = true;
             this.btnImagenes.Click += new System.EventHandler(this.btnImagenes_Click);
-            //
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

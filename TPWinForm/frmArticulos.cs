@@ -36,8 +36,21 @@ namespace TPWinForm
             cbCampo.Items.Add("Categoria");
             cbCampo.Items.Add("Precio");
         }
+        
+        private void ocultarColumnas()
+        {
+            if (dgvArticulos.Columns["Id"] != null)
+                dgvArticulos.Columns["Id"].Visible = false;
+            if (dgvArticulos.Columns["Imagenes"] != null)
+                dgvArticulos.Columns["Imagenes"].Visible = false;
 
-
+            if (dgvArticulos.Columns["Codigo"] != null)
+                dgvArticulos.Columns["Codigo"].DisplayIndex = 0;
+            if (dgvArticulos.Columns["Nombre"] != null)
+                dgvArticulos.Columns["Nombre"].DisplayIndex = 1;
+            if (dgvArticulos.Columns["Descripcion"] != null)
+                dgvArticulos.Columns["Descripcion"].DisplayIndex = 2;
+        }
         private void cargar()
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
@@ -302,6 +315,10 @@ namespace TPWinForm
             frmCategoria categorias = new frmCategoria();
             categorias.ShowDialog();
             cargar();
+        }
+        private void dgvArticulos_DataBindingComplete_1(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            ocultarColumnas();
         }
     }
 }
